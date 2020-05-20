@@ -32,33 +32,7 @@
         </section>
 
         <section class="section contact">
-            <div class="container">
-                <div class="columns">
-                    <div class="column is-three-fifths is-offset-one-fifth">
-                        <div class="field">
-                            <label class="label">Name</label>
-                            <div class="control">
-                            <input class="input" type="text" placeholder="Name">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control">
-                            <input class="input" type="text" placeholder="Name">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Message</label>
-                            <div class="control">
-                            <textarea name="message" id="message" cols="30" rows="3" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-           
-                    </div>
-                </div>
-            </div>
+            <rdb-contact-form></rdb-contact-form>
         </section>
 
     </div>
@@ -71,6 +45,7 @@ import Services from '@/components/Services/Services';
 import Products from '@/components/Products/Products';
 import Feature from '@/components/Feature/Feature';
 import Testimonials from '@/components/Testimonials/Testimonials';
+import ContactForm from '@/components/ContactForm/Contact';
 
 export default {
     name: 'Home',
@@ -81,6 +56,7 @@ export default {
         'rdb-products': Products,
         'rdb-feature': Feature,
         'rdb-testimonials': Testimonials,
+        'rdb-contact-form': ContactForm,
     },
 
     data() {
@@ -156,42 +132,14 @@ export default {
     }
 
     .testimonials {
-        height: 70vh;
+        // height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .contact {
-        background: #000;
-
-        label {
-            color: white;
-            font-size: 23px;
-            font-weight: 300;
-        }
-
-        textarea,
-        input[type="text"] {
-            padding: 20px 0px;
-            border: 0;
-            background: none;
-            border-bottom: 1px solid #fff;
-            border-radius: 0;
-            margin-bottom: 25px;
-            color: #fff;
-            font-size: 23px;
-            font-weight: 100;
-            letter-spacing: 1px;
-
-            &:focus {
-                outline: none !important;
-                box-shadow: none !important;
-            }
-        }
-
-        textarea {
-            width: 100%;
-        }
+        background: #212121;
     }
+
 </style>
