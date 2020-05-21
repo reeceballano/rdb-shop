@@ -2,15 +2,18 @@
   <div id="app">
     <rdb-nav></rdb-nav>
     <router-view/>
+    <rdb-footer></rdb-footer>
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Navigation';
+import Footer from '@/components/Footer/Footer';
 
 export default {
     components: {
         'rdb-nav': Nav,    
+        'rdb-footer': Footer,    
     },
 }
 </script>

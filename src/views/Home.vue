@@ -139,7 +139,7 @@ export default {
     }
 
     .contact {
-        background: #212121;
+        background: #424242;
     }
 
 </style>

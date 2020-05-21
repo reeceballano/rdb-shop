@@ -15,7 +15,7 @@
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero excepturi labore nemo aut facere. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero excepturi labore nemo aut facere</p>
                 </div>
 
-                <form action="#">
+                <form action="#" @submit.prevent="sendForm">
                     <div class="field">
                         <label class="label">Name</label>
                         <div class="control">
@@ -55,6 +55,16 @@ export default {
             lightsOn: false,
         }
     },
+
+    methods: {
+        sendForm() {
+            this.lightsOn = true;
+
+            setTimeout( () => {
+                this.lightsOn = false;
+            }, 2000);
+        }
+    }
 
 }
 </script>
