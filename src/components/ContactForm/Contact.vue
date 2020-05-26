@@ -60,9 +60,9 @@ export default {
         sendForm() {
             this.lightsOn = true;
 
-            setTimeout( () => {
-                this.lightsOn = false;
-            }, 2000);
+            // setTimeout( () => {
+            //     this.lightsOn = false;
+            // }, 2000);
         }
     }
 

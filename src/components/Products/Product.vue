@@ -1,36 +1,39 @@
 <template>
     <div :class="`is-${column}`" class="column">
-        <div class="card">
-            <div class="card-image">
-                <figure class="image">
-                    
-                    <img :src="require(`@/assets/images/${productImage}`) " alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content ">
-                <div class="columns is-vcentered is-variable is-3">
-                    <div class="column is-8">
-                        <h4 class="title is-4 item-title">{{ name }}</h4>
-                        <h4 class="title is-4">${{ price }}</h4>
-                    </div>
-                    <div class="column is-4">
-                        <p class="buttons">
-                            <app-add-to-wishlist
-                                :id="id"
-                                :name="name"
-                                label="Add To Wishlist"
-                            ></app-add-to-wishlist>
-                            <app-add-to-cart
-                                :id="id"
-                                :name="name"
-                                label="Add To Cart"
-                                @addToCart="addToCart(id)"
-                            ></app-add-to-cart>
-                        </p>
+        <router-link :to="{ name: 'Product', params: { id: id, name: name, price: price, image: productImage } }">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image">
+                        
+                        <img :src="require(`@/assets/images/${productImage}`) " alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="card-content ">
+                    <div class="columns is-vcentered is-variable is-3">
+                        <div class="column is-8">
+                            <h4 class="title is-4 item-title">{{ name }}</h4>
+                            <h4 class="title is-4">${{ price }}</h4>
+                        </div>
+                        <div class="column is-4">
+                            <p class="buttons">
+                                <app-add-to-wishlist
+                                    :id="id"
+                                    :name="name"
+                                    label="Add To Wishlist"
+                                ></app-add-to-wishlist>
+                                <app-add-to-cart
+                                    :id="id"
+                                    :name="name"
+                                    label="Add To Cart"
+                                    @addToCart="addToCart(id)"
+                                ></app-add-to-cart>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </router-link>
     </div>
 </template>
 

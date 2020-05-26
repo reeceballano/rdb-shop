@@ -15,6 +15,10 @@ export default {
         'rdb-nav': Nav,    
         'rdb-footer': Footer,    
     },
+
+    created() {
+        this.$store.dispatch('product/getAllProducts');
+    }
 }
 </script>
 

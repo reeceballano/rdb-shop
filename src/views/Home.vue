@@ -4,9 +4,9 @@
         
         <section class="section featured-1">
             <rdb-featured-product
-                :product-img="products[0].img"
-                :product-name="products[0].name"
-                :product-desc="products[0].desc"
+                :product-img="getProducts[0].img"
+                :product-name="getProducts[0].name"
+                :product-desc="getProducts[0].desc"
                 :is-left="true"
             ></rdb-featured-product>
         </section>
@@ -18,7 +18,7 @@
         <section class="section product-list">
             <rdb-products 
                 :column="4"
-                :data="products"
+                :data="getProducts"
             >
             </rdb-products>
         </section>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Hero from '@/components/Hero';
 import FeaturedProduct from '@/components/Products/FeaturedProducts';
 import Services from '@/components/Services/Services';
@@ -61,57 +62,12 @@ export default {
 
     data() {
         return {
-            products: [
-                {
-                    id: 1,
-                    name: 'Chair 1',
-                    desc: 'Chair 1 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 25,
-                    img: 'chair-2.png'
-                },
-
-                {
-                    id: 2,
-                    name: 'Chair 2',
-                    desc: 'Chair 2 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 35,
-                    img: 'chair-1.png'
-                },
-
-                {
-                    id: 3,
-                    name: 'Chair 3',
-                    desc: 'Chair 3 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 45,
-                    img: 'chair-3.png'
-                },
-
-                                {
-                    id: 4,
-                    name: 'Chair 4',
-                    desc: 'Chair 4 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 25,
-                    img: 'chair-1.png'
-                },
-
-                {
-                    id: 5,
-                    name: 'Chair 5',
-                    desc: 'Chair 5 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 35,
-                    img: 'chair-1.png'
-                },
-
-                {
-                    id: 6,
-                    name: 'Chair 6',
-                    desc: 'Chair 6 built to last, the safety of you laptop and instruments is guaranteed.',
-                    price: 45,
-                    img: 'chair-1.png'
-                }
-            ]
         }
-    }
+    },
+
+    computed: {
+        ...mapGetters('product', ['getProducts']),
+    },
 }
 </script>
 
