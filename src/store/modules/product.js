@@ -39,7 +39,7 @@ const actions = {
                 tab:[
                     {
                         label: 'Description',
-                        content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
+                        content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
                         label: 'Gallery',

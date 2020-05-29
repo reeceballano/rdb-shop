@@ -37,7 +37,7 @@
 export default {
     props: {
         productTabs: {
-            type: Object
+            // type: Object
         }
     },
 

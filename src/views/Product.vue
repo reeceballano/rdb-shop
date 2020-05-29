@@ -23,16 +23,16 @@
                         <p>{{ getProduct.desc }}</p>                    
                         <div class="buttons">
                             <app-add-to-cart
-                                :id="Number(product.id)"
-                                :name="product.name"
-                                :price="product.price"                        
+                                :id="Number(getProduct.id)"
+                                :name="getProduct.name"
+                                :price="getProduct.price"                        
                             >
                             </app-add-to-cart>
 
                             <app-add-to-wishlist
-                                :id="Number(product.id)"
-                                :name="product.name"
-                                :price="product.price"                        
+                                :id="Number(getProduct.id)"
+                                :name="getProduct.name"
+                                :price="getProduct.price"                        
                             >
                             </app-add-to-wishlist>
 
@@ -47,7 +47,11 @@
                 <div class="product-main-content">
                     <app-product-tabs :product-tabs="getProduct"></app-product-tabs>
                 </div>
-            </div>            
+            </div> 
+        </section>
+
+        <section class="section related-products">
+            <app-related-products :data="getProducts" :count="3" ></app-related-products>
         </section>
     </div>
 </template>
@@ -57,6 +61,7 @@ import { mapGetters } from 'vuex';
 import AddToCart from '@/components/Cart/AddToCart';
 import AddToWishlist from '@/components/Wishlist/AddToWishlist';
 import ProductTabs from '@/components/ProductTabs/Tabs';
+import RelatedProducts from '@/components/Products/RelatedProducts';
 
 export default {
     name: 'ProductView',
@@ -64,12 +69,12 @@ export default {
     components: {
         'app-add-to-cart': AddToCart,
         'app-add-to-wishlist': AddToWishlist,
-        'app-product-tabs': ProductTabs
+        'app-product-tabs': ProductTabs,
+        'app-related-products': RelatedProducts,
     },
 
     data() {
         return {
-            product: this.$route.params,
             tabs: {
                 link: 0,
                 content: 0,
@@ -78,20 +83,25 @@ export default {
         }
     },
 
+    watch: {
+        // call again the method if the route changes
+        '$route': 'fetchData'
+    },
+
     computed: {
-        ...mapGetters('product', ['getProduct']),
+        ...mapGetters('product', ['getProduct', 'getProducts']),
     },
 
     created() {
-        this.$store.dispatch('product/getSingleProduct', Number(this.product.id));
+        this.fetchData();
     },
 
-    mounted() {
-        console.log(this.getProduct)
-    },
-
-
-
+    methods: {
+        fetchData() {
+            console.log('id: ', this.$route.params)
+            this.$store.dispatch('product/getSingleProduct', Number(this.$route.params.id));
+        }
+    }
 }
 </script>
 
