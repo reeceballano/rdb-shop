@@ -22,14 +22,14 @@
                             native-value="highest">
                             Highest
                         </b-radio>
-                    </div>    
+                    </div>  
 
                 </div>
             </div>
             <div class="column">
                 <div class="columns is-variable is-5 is-multiline">
                     <rdb-product
-                        v-for="product in data"
+                        v-for="product in filteredData"
                         :column="column"
                         :key="product.id"
                         :id="product.id"
@@ -51,7 +51,7 @@ export default {
     name: 'Products',
 
     props: {
-        data: {
+        productData: {
             type: Array,
         },
 
@@ -68,9 +68,27 @@ export default {
 
     data() {
         return {
-            sortByPrice: 'lowest'
+            sortByPrice: 'lowest',
+            filtered: [],
         }
-    }
+    },
+
+    computed: {
+        filteredData() {
+            let products = this.productData;
+
+            if(this.sortByPrice === 'lowest') {
+                let lowest = products.sort( (a, b) => parseFloat(a.price) - parseFloat(b.price) );
+
+                return lowest;
+            } else {
+                let highest = products.sort( (a, b) => parseFloat(b.price) - parseFloat(a.price) );
+
+                return highest;
+            }
+        }
+    },
+
 }
 </script>
 

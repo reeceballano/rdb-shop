@@ -28,7 +28,7 @@ const mutations = {
 
 // ACTIONS
 const actions = {
-    getAllProducts({ commit }) {
+    getAllProducts({ commit, state }) {
         let data = [
             {
                 id: 1,
@@ -140,6 +140,8 @@ const actions = {
         ]
 
         commit('SET_PRODUCTS', data);
+
+        console.log(`store: ${ JSON.stringify(state.products) }`)
     },
 
     getSingleProduct({ commit, state }, payload) {

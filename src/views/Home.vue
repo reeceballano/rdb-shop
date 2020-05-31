@@ -18,7 +18,7 @@
         <section class="section product-list">
             <rdb-products 
                 :column="4"
-                :data="getProducts"
+                :productData="getProducts"
             >
             </rdb-products>
         </section>
