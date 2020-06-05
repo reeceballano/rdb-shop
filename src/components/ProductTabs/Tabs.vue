@@ -19,9 +19,8 @@
 
         <div class="block">
             <div class="columns">
-
                 <div 
-                    class="column"
+                    class="column product-desc"
                     v-for="(tab, i) in productTabs.tab"
                     :key="i"
                     v-show="tabs.link == i"
@@ -34,6 +33,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         productTabs: {
@@ -41,13 +41,15 @@ export default {
         }
     },
 
+
     data() {
         return {
             tabs: {
                 link: 0,
                 content: 0,
                 isActive: false,
-            }
+            },
+
         }
     },
 
@@ -55,11 +57,20 @@ export default {
         clickTab(id) {
             this.tabs.link = id;
             console.log(this.tabs.link);
-        }
+        },
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    .product-html {
+        p {
+            margin-bottom: 25px !important;
+        }
+    }
 
+    .product-desc {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 </style>

@@ -28,7 +28,7 @@ const mutations = {
 
 // ACTIONS
 const actions = {
-    getAllProducts({ commit, state }) {
+    getAllProducts({ commit }) {
         let data = [
             {
                 id: 1,
@@ -39,13 +39,15 @@ const actions = {
                 tab:[
                     {
                         label: 'Description',
-                        content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
+                        content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             },
 
             {
@@ -60,10 +62,12 @@ const actions = {
                         content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             },
 
             {
@@ -78,10 +82,12 @@ const actions = {
                         content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             },
 
             {
@@ -96,10 +102,12 @@ const actions = {
                         content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             },
 
             {
@@ -111,13 +119,15 @@ const actions = {
                 tab:[
                     {
                         label: 'Description',
-                        content:  '5Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
+                        content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             },
 
             {
@@ -132,16 +142,16 @@ const actions = {
                         content:  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor quis obcaecati excepturi ducimus sint, beatae minima suscipit, commodi fugit eligendi eius inventore.',
                     },
                     {
-                        label: 'Gallery',
-                        content: ['chair-1.png', 'chair-2.png']
+                        label: 'Specification',
+                        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga delectus, nostrum repellat recusandae assumenda sequi blanditiis dolor'
                     }
-                ]
+                ],
+
+                gallery: ['chair-1.png', 'chair-2.png'],
             }
         ]
 
         commit('SET_PRODUCTS', data);
-
-        console.log(`store: ${ JSON.stringify(state.products) }`)
     },
 
     getSingleProduct({ commit, state }, payload) {

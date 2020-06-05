@@ -15,6 +15,16 @@
                         <div class="media">
                             <img :src="require(`@/assets/images/${getProduct.img}`)" alt="" />
                         </div>
+
+                        <div class="columns is-multiline gallery-container">
+                            <div 
+                                class="column is-2"
+                                v-for="product in getProduct.gallery"
+                                :key="product.id"
+                            >
+                                <img :src="require(`@/assets/images/${product}`)" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="column product-details">
@@ -124,6 +134,10 @@ export default {
         img {
             padding: 50px;
         }
+    }
+
+    .gallery-container {
+        margin-top: 10px;
     }
 
     .product-details {
