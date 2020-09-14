@@ -10,30 +10,13 @@
 
 <script>
 export default {
-    props: {
-        id: {
-            type: Number
-        },
-
-        name: {
-            type: String
-        },
-
-        price: {
-            type: Number
-        },
-
-        label: {
-            type: String
-        }
-    },
-
     data() {
         return {}
     },
 
     methods: {
         addToCart() {
+            this.$store.dispatch('cart/setCartStatus', true);
             this.$emit('addToCart');
         }
     }

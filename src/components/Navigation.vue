@@ -26,6 +26,9 @@
                     <b-navbar-item href="#">
                         Contact Us
                     </b-navbar-item>
+                    <b-navbar-item href="#">
+                        Cart{{getCartItemsCount}}
+                    </b-navbar-item>
                 </template>
 
                 <template slot="end">
@@ -44,6 +47,16 @@
         </div>
     </section>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+    computed: {
+        ...mapGetters('cart', ['getCartItemsCount']),
+    }        
+}
+</script>
 
 <style lang="scss" scoped>
     .button {

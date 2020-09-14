@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <rdb-nav></rdb-nav>
+    <rdb-cart-widget :cart-items="getCartItems"></rdb-cart-widget>
     <router-view/>
     <rdb-footer></rdb-footer>
   </div>
@@ -9,15 +10,23 @@
 <script>
 import Nav from '@/components/Navigation';
 import Footer from '@/components/Footer/Footer';
+import CartWidget from '@/components/Cart/CartWidget';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
         'rdb-nav': Nav,    
-        'rdb-footer': Footer,    
+        'rdb-footer': Footer,   
+        'rdb-cart-widget': CartWidget,
+    },
+
+    computed: {
+        ...mapGetters('cart', ['getCartItems', 'getCartWidgetStatus']),
     },
 
     created() {
         this.$store.dispatch('product/getAllProducts');
+        this.$store.dispatch('cart/loadCart');
     }
 }
 </script>

@@ -67,7 +67,7 @@ const actions = {
                     }
                 ],
 
-                gallery: ['chair-1.png', 'chair-2.png'],
+                gallery: ['chair-1.png', 'chair-2.png', 'chair-1.png', 'chair-2.png', 'chair-1.png', 'chair-2.png', 'chair-1.png', 'chair-2.png'],
             },
 
             {

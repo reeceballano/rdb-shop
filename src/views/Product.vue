@@ -4,25 +4,21 @@
             <div class="container">
                 <div class="columns is-variable is-8">
                     <div class="column is-7">
-                        <nav class="breadcrumb" aria-label="breadcrumbs">
-                            <ul>
-                                <li><a href="#">Bulma</a></li>
-                                <li><a href="#">Documentation</a></li>
-                                <li><a href="#">Components</a></li>
-                                <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-                            </ul>
-                        </nav>
+                        <app-breadcrumb 
+                            :product-breadcrumb="breadcrumb"
+                            :current-page-name="getProduct.name"
+                        >
+                        </app-breadcrumb>
                         <div class="media">
-                            <img :src="require(`@/assets/images/${getProduct.img}`)" alt="" />
+                            <img ref="bigImage" :src="require(`@/assets/images/${getProduct.img}`)" alt="" />
                         </div>
-
                         <div class="columns is-multiline gallery-container">
                             <div 
-                                class="column is-2"
+                                class="column is-2 gallery-thumb"
                                 v-for="product in getProduct.gallery"
                                 :key="product.id"
                             >
-                                <img :src="require(`@/assets/images/${product}`)" />
+                                <img @mouseover="changeImage(product)" @click.prevent="changeImage(product)" :src="require(`@/assets/images/${product}`)" />
                             </div>
                         </div>
                     </div>
@@ -45,7 +41,6 @@
                                 :price="getProduct.price"                        
                             >
                             </app-add-to-wishlist>
-
                         </div>
                     </div>
                 </div>
@@ -72,6 +67,7 @@ import AddToCart from '@/components/Cart/AddToCart';
 import AddToWishlist from '@/components/Wishlist/AddToWishlist';
 import ProductTabs from '@/components/ProductTabs/Tabs';
 import RelatedProducts from '@/components/Products/RelatedProducts';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default {
     name: 'ProductView',
@@ -81,6 +77,7 @@ export default {
         'app-add-to-wishlist': AddToWishlist,
         'app-product-tabs': ProductTabs,
         'app-related-products': RelatedProducts,
+        'app-breadcrumb': Breadcrumb,
     },
 
     data() {
@@ -89,7 +86,14 @@ export default {
                 link: 0,
                 content: 0,
                 isActive: false,
-            }
+            },
+
+            breadcrumb: [
+                { 
+                    link: `/product/${Number(this.$route.params.id)}`, 
+                }
+            ]
+            
         }
     },
 
@@ -100,6 +104,10 @@ export default {
 
     computed: {
         ...mapGetters('product', ['getProduct', 'getProducts']),
+
+        productName() {
+            return this.getProduct.name;
+        }
     },
 
     created() {
@@ -110,7 +118,13 @@ export default {
         fetchData() {
             console.log('id: ', this.$route.params)
             this.$store.dispatch('product/getSingleProduct', Number(this.$route.params.id));
-        }
+        },
+
+        changeImage(img) {
+            let image = this.$refs.bigImage.src = require(`@/assets/images/${img}`);
+            return  image;
+        },
+
     }
 }
 </script>
@@ -132,12 +146,14 @@ export default {
         box-shadow: 1px 2px 27px rgba(0, 0, 0, 0.11);
 
         img {
-            padding: 50px;
+            // padding: 50px;
         }
     }
 
     .gallery-container {
         margin-top: 10px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .product-details {
@@ -156,6 +172,30 @@ export default {
 
     .product-main-desc {
         background: #fff;
+    }
+
+    .gallery-thumb {
+        cursor: pointer;
+        background: #fdfdfd;
+        margin-bottom: 1px;
+        position: relative;
+        -webkit-transition: all ease-in-out 0.3s;
+        -moz-transition: all ease-in-out 0.3s;
+        transition: all ease-in-out 0.3s;
+
+        &:hover {
+            background: #cccccc;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: #f4f4f4;
+        }
     }
 
 </style>

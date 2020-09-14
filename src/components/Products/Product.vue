@@ -25,7 +25,7 @@
                                     :id="id"
                                     :name="name"
                                     label="Add To Cart"
-                                    @addToCart="addToCart(id)"
+                                    @addToCart="addToCart"
                                 ></app-add-to-cart>
                             </p>
                         </div>
@@ -73,8 +73,16 @@ export default {
     },
 
     methods: {
-        addToCart(id) {
-            console.log('added to cart ', id);
+        addToCart() {
+            const product = {
+                id: this.id,
+                name: this.name,
+                price: this.price,
+                productImage: this.productImage
+            }
+
+            this.$store.dispatch('cart/addCart', product);
+            console.log('added to cart ');
         }
     }
 }
