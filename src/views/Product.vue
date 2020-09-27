@@ -31,7 +31,8 @@
                             <app-add-to-cart
                                 :id="Number(getProduct.id)"
                                 :name="getProduct.name"
-                                :price="getProduct.price"                        
+                                :price="getProduct.price"  
+                                @addToCart="addToCart"                      
                             >
                             </app-add-to-cart>
 
@@ -124,6 +125,18 @@ export default {
             let image = this.$refs.bigImage.src = require(`@/assets/images/${img}`);
             return  image;
         },
+
+        addToCart() {
+            const product = {
+                id: this.getProduct.id,
+                name: this.getProduct.name,
+                price: this.getProduct.price,
+                productImage: this.getProduct.productImage
+            }
+
+            this.$store.dispatch('cart/addCart', product);
+            console.log('added to cart ');
+        }
 
     }
 }

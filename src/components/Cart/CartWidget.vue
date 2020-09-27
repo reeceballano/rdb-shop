@@ -6,7 +6,11 @@
         </h3>
         <ul>
             <li v-for="cart in cartItems" :key="cart.id">
-                {{ cart.name }} | Price: ${{ cart.price }} | Qty: {{ cart.qty }} <a href="#" @click.prevent="decreaseItem(cart)">-</a> <a href="#" @click.prevent="increaseItem(cart)">+</a>
+                <a class="cart-btn-action" href="#" @click.prevent="removeItem(cart.id)">x</a>${{ cart.price }} {{ cart.name }} / Qty: {{ cart.qty }}
+                <div class="cart-update-btns">
+                    <a class="cart-btn-action"  href="#" @click.prevent="decreaseItem(cart)"><span>-</span></a> 
+                    <a class="cart-btn-action"  href="#" @click.prevent="increaseItem(cart)"><span>+</span></a>
+                </div>
             </li>
         </ul>
     </div>
@@ -47,6 +51,10 @@ export default {
             }
         },
 
+        removeItem(payload) {
+            this.$store.dispatch('cart/removeCartItem', payload);
+        },
+
         increaseItem(payload) {
             const item = payload;
             item.action = 'increase';
@@ -77,7 +85,7 @@ export default {
         width: 30%;
         position: fixed;
         right: -1000px;
-        background: #505050;
+        background: #2d154ce6;
         top: 0;
         height: 100vh;
         padding: 50px 35px;
@@ -88,30 +96,60 @@ export default {
         transition: all ease-in-out 1s;
     }
 
+    ul {
+        li {
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #55416f;
+
+            .cart-btn-action {
+                color: #d46161;
+                margin-right: 10px;
+            }
+
+            .cart-update-btns {
+                margin-left: 10px;
+                display: inline-block;
+                a {
+                    color: #35b1b1;
+                    border: 1px solid;
+                    height: 20px;
+                    width: 20px;
+                    display: inline-block;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
     .cart-active {
         right: 0;
     }
 
     .close-btn {
-        display: block;
-        text-align: center;
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        top: 11px;
-        right: 11px;
-        background: #f5f0eb;
-        color: #000;
-        border-radius: 50%;
-        cursor: pointer;
-        -webkit-transition: all ease-in-out 0.3s;
-        -moz-transition: all ease-in-out 0.3s;
-        transition: all ease-in-out 0.3s;
+display: block;
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 15px;
+    right: 17px;
+    background: #a579de;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    font-size: 13px;
         
         &:hover {
             background: #000 !important;
             color: #fff;
         }
+    }
+
+    .title {
+        font-size: 1rem !important;
     }
 
 </style>

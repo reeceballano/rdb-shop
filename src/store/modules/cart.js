@@ -44,7 +44,6 @@ const actions = {
         }
 
         commit('SET_CART', JSON.parse(cartLocalStorage));
-        console.log(JSON.parse(cartLocalStorage));
     },
 
     addCart({ commit }, payload) {
@@ -110,6 +109,30 @@ const actions = {
 
         console.log(item);
 
+    },
+
+    removeCartItem({ state, commit }, payload) {
+        const cart = state.cart;
+
+        // CHECK ITEM
+        const items = cart.filter(item => parseInt(item.id) !== parseInt(payload));
+        
+        // UPDATE AND SET CART STATE
+        commit('SET_CART', items);
+
+        // SET THE NEW CART OBJECT IN LOCALSTORAGE
+        localStorage.setItem('cart', JSON.stringify(items));
+    },
+
+    findItem({ state }, payload) {
+        console.log('find item: ', payload)
+        const item = state.cart.find(item => parseInt(item.id) === parseInt(payload));
+
+        if (item) {
+            return true
+        }
+
+        return false;
     },
 
     setCartStatus({ commit }, payload) {

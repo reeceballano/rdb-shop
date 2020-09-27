@@ -32,10 +32,7 @@
                         v-for="product in filteredData"
                         :column="column"
                         :key="product.id"
-                        :id="product.id"
-                        :name="product.name"
-                        :price="product.price"
-                        :productImage="product.img"
+                        :product="product"
                     >
                     </rdb-product>
                 </div>
@@ -72,6 +69,8 @@ export default {
             filtered: [],
         }
     },
+
+
 
     computed: {
         filteredData() {

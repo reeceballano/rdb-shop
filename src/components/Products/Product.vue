@@ -1,31 +1,32 @@
 <template>
     <div :class="`is-${column}`" class="column">
-        <router-link :to="{ name: 'Product', params: { id: id, name: name, price: price, image: productImage } }">
+        <router-link :to="{ name: 'Product', params: { id: product.id } }">
             <div class="card">
                 <div class="card-image">
                     <figure class="image">
-                        
-                        <img :src="require(`@/assets/images/${productImage}`) " alt="Placeholder image">
+                        <img :src="require(`@/assets/images/${product.img}`) " alt="Placeholder image">
                     </figure>
                 </div>
                 <div class="card-content ">
                     <div class="columns is-vcentered is-variable is-3">
                         <div class="column is-8">
-                            <h4 class="title is-4 item-title">{{ name }}</h4>
-                            <h4 class="title is-4">${{ price }}</h4>
+                            <h4 class="title is-4 item-title">{{ product.name }}</h4>
+                            <h4 class="title is-4">${{ product.price }}</h4>
                         </div>
                         <div class="column is-4">
                             <p class="buttons">
                                 <app-add-to-wishlist
-                                    :id="id"
-                                    :name="name"
+                                    :id="product.id"
+                                    :name="product.name"
                                     label="Add To Wishlist"
                                 ></app-add-to-wishlist>
+
                                 <app-add-to-cart
-                                    :id="id"
-                                    :name="name"
+                                    :id="product.id"
                                     label="Add To Cart"
+                                    :name="product.name"
                                     @addToCart="addToCart"
+                                    :isDisabled="isDisabled"
                                 ></app-add-to-cart>
                             </p>
                         </div>
@@ -40,6 +41,7 @@
 <script>
 import AddToCart from '@/components/Cart/AddToCart';
 import AddToWishlist from '@/components/Wishlist/AddToWishlist';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Product',
@@ -55,30 +57,49 @@ export default {
             default: 4
         },
 
-        id: {
-            type: Number,
-        },
+        product: {
+            type: Object,
+            required: true
+        }
+    },
 
-        name: {
-            type: String,
-        },
+    data() {
+        return {
+            isDisabled: false,
+        }
+    },
 
-        price: {
-            type: Number,
-        },
+    computed: {
+        ...mapGetters('cart', ['getCartItems']),
+    },
 
-        productImage: {
-            type: String,
+    mounted() {
+        this.checkItem();
+    },
+
+    watch: {
+        getCartItems() {
+            this.checkItem();
         }
     },
 
     methods: {
+        checkItem() {
+            const item = this.getCartItems.find(item => item.id === this.product.id);
+
+            if(item) {
+                this.isDisabled = true;
+            } else {
+                this.isDisabled = false;
+            }
+        },
+        
         addToCart() {
             const product = {
-                id: this.id,
-                name: this.name,
-                price: this.price,
-                productImage: this.productImage
+                id: this.product.id,
+                name: this.product.name,
+                price: this.product.price,
+                productImage: this.product.productImage
             }
 
             this.$store.dispatch('cart/addCart', product);

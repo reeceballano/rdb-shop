@@ -1,6 +1,6 @@
 <template>
     <div class="add-to-cart">
-        <button @click.prevent="addToCart" class="button is-rounded is-outlined">
+        <button @click.prevent="addToCart" class="button is-rounded is-outlined" :disabled="isDisabled">
             <span class="icon">
                 <i class="fas fa-shopping-cart"></i>
             </span>
@@ -10,6 +10,10 @@
 
 <script>
 export default {
+    props: {
+        isDisabled: Boolean
+    },
+
     data() {
         return {}
     },
