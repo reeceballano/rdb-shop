@@ -81,6 +81,37 @@ const actions = {
         commit('SET_CART', cart);
     },
 
+    updateCartItem({ state, commit }, payload) {
+        const cart = state.cart;
+        const item = cart.find(item => item.id === payload.id);
+
+        // CHECK IF ITEM IS EXIST
+        if (item) {
+            // CHECK IF INCREASE OR DECREASE ITEM/QTY
+            switch (payload.action) {
+                case 'increase':
+                    item.qty++;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    commit('SET_CART', cart);
+
+                    break;
+                
+                case 'decrease':
+                    item.qty--;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    commit('SET_CART', cart);
+
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        console.log(item);
+
+    },
+
     setCartStatus({ commit }, payload) {
         commit('SET_IS_CART_ACTIVE', payload);
     }

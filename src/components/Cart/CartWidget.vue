@@ -6,7 +6,7 @@
         </h3>
         <ul>
             <li v-for="cart in cartItems" :key="cart.id">
-                {{ cart.name }} | Price: ${{ cart.price }} | Qty: {{ cart.qty }}
+                {{ cart.name }} | Price: ${{ cart.price }} | Qty: {{ cart.qty }} <a href="#" @click.prevent="decreaseItem(cart)">-</a> <a href="#" @click.prevent="increaseItem(cart)">+</a>
             </li>
         </ul>
     </div>
@@ -30,6 +30,38 @@ export default {
     methods: {
         closeCart() {
             this.$store.dispatch('cart/setCartStatus', false);
+        },
+
+        updateItem(payload) {
+            switch(payload.action) {
+                case 'increase':
+                    this.$store.dispatch('cart/updateCartItem', payload);
+                    break;
+
+                case 'decrease':
+                    this.$store.dispatch('cart/updateCartItem', payload);
+                    break;
+
+                default :
+                    break;
+            }
+        },
+
+        increaseItem(payload) {
+            const item = payload;
+            item.action = 'increase';
+            this.updateItem(item);
+        },
+
+        decreaseItem(payload) {
+            const item = payload;
+
+            item.action = 'decrease';
+
+            if(item.qty !== 0) {
+                this.updateItem(item);
+            }
+                    
         }
     }
 }
