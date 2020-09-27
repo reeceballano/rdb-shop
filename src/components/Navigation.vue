@@ -26,8 +26,8 @@
                     <b-navbar-item href="#">
                         Contact Us
                     </b-navbar-item>
-                    <b-navbar-item href="#">
-                        Cart{{getCartItemsCount}}
+                    <b-navbar-item href="#" @click.prevent="showCart">
+                        Cart <sup>{{getCartItemsCount}}</sup>
                     </b-navbar-item>
                 </template>
 
@@ -54,7 +54,13 @@ import { mapGetters } from 'vuex';
 export default {
     computed: {
         ...mapGetters('cart', ['getCartItemsCount']),
-    }        
+    },
+    
+    methods: {
+        showCart() {
+            this.$store.dispatch('cart/setCartStatus', true);
+        }
+    }
 }
 </script>
 
@@ -66,6 +72,13 @@ export default {
     .main-nav {
         padding-top: 50px !important;
         padding-bottom: 50px !important;
+    }
+
+    sup {
+        font-size: 10px;
+        margin-top: -14px;
+        margin-left: 4px;
+        color: #7957d5;
     }
 
 </style>
