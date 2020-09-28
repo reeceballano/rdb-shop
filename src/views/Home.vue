@@ -4,9 +4,7 @@
         
         <section class="section featured-1">
             <rdb-featured-product
-                :product-img="getProducts[0].img"
-                :product-name="getProducts[0].name"
-                :product-desc="getProducts[0].desc"
+                :product="getProducts[0]"
                 :is-left="true"
             ></rdb-featured-product>
         </section>

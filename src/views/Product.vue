@@ -32,14 +32,16 @@
                                 :id="Number(getProduct.id)"
                                 :name="getProduct.name"
                                 :price="getProduct.price"  
-                                @addToCart="addToCart"                      
+                                @addToCart="addToCart"    
+                                :isDisabled="isDisabled"                  
                             >
                             </app-add-to-cart>
 
                             <app-add-to-wishlist
                                 :id="Number(getProduct.id)"
                                 :name="getProduct.name"
-                                :price="getProduct.price"                        
+                                :price="getProduct.price"         
+                                :wishButton="true"               
                             >
                             </app-add-to-wishlist>
                         </div>
@@ -83,6 +85,7 @@ export default {
 
     data() {
         return {
+            isDisabled: false,
             tabs: {
                 link: 0,
                 content: 0,
@@ -105,6 +108,7 @@ export default {
 
     computed: {
         ...mapGetters('product', ['getProduct', 'getProducts']),
+        ...mapGetters('cart', ['getCartItems']),
 
         productName() {
             return this.getProduct.name;
@@ -113,6 +117,10 @@ export default {
 
     created() {
         this.fetchData();
+    },
+
+    mounted() {
+        this.checkItem();
     },
 
     methods: {
@@ -135,7 +143,17 @@ export default {
             }
 
             this.$store.dispatch('cart/addCart', product);
-            console.log('added to cart ');
+            this.checkItem();
+        },
+
+        checkItem() {
+            const item = this.getCartItems.find(item => item.id === this.getProduct.id);
+
+            if(item) {
+                this.isDisabled = true;
+            } else {
+                this.isDisabled = false;
+            }
         }
 
     }

@@ -19,6 +19,7 @@
                                     :id="product.id"
                                     :name="product.name"
                                     label="Add To Wishlist"
+                                    :wishButton="true"
                                 ></app-add-to-wishlist>
 
                                 <app-add-to-cart

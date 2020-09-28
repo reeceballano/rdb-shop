@@ -10,6 +10,13 @@ const getters = {
         return state.cart;
     },
 
+    getSubtotal: state => {
+        return state.cart.reduce(
+            (a, b) => a + b.price * b.qty,
+            0
+        )
+    },
+
     getCartItemsCount: state => {
         return state.cart
             .map(item => item.qty)

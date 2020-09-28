@@ -1,6 +1,6 @@
 <template>
     <div class="add-to-cart">
-        <button class="button is-rounded is-outlined">
+        <button class="button is-rounded is-outlined" disabled>
             <span class="icon">
                 <i class="far fa-heart"></i>
             </span>
@@ -11,6 +11,10 @@
 <script>
 export default {
     props: {
+        wishButton: {
+            type: Boolean
+        },
+
         id: {
             type: Number
         },

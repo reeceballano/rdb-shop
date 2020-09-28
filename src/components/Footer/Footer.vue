@@ -6,7 +6,7 @@
                     <div class="column">
                         <img
                             class="logo-footer"
-                            src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
+                            :src="require(`@/assets/images/RB.png`)"
                             alt="Lightweight UI components for Vue.js based on Bulma"
                             width="100"
                         >

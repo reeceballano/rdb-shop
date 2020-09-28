@@ -13,6 +13,9 @@
                 </div>
             </li>
         </ul>
+        <div class="subtotal">
+            <strong>SubTotal:</strong> ${{ getSubtotal }}
+        </div>
     </div>
 </template>
 
@@ -28,7 +31,7 @@ export default {
     },
 
     computed: {
-        ...mapGetters('cart', ['getCartWidgetStatus']),
+        ...mapGetters('cart', ['getCartWidgetStatus', 'getSubtotal']),
     },
 
     methods: {
@@ -66,7 +69,7 @@ export default {
 
             item.action = 'decrease';
 
-            if(item.qty !== 0) {
+            if(item.qty >= 2) {
                 this.updateItem(item);
             }
                     
@@ -79,6 +82,16 @@ export default {
     h3 {
         color: #fff;
         font-size: 21px;
+    }
+
+    .subtotal {
+        font-size: 13px;
+        color: #fff;
+
+        strong {
+            color: #fff;
+            margin-right: 10px;
+        }
     }
 
     .cart-widget {
