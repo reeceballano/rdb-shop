@@ -9,20 +9,67 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     props: {
-        isDisabled: Boolean
+        id: {
+            type: Number,
+            required: true
+        },
+
+        product: {
+            type: Object,
+            required: true
+        }
     },
 
     data() {
-        return {}
+        return {
+            isDisabled: false,
+        }
+    },
+
+    computed: {
+        ...mapGetters('cart', ['getCartItems'])
+    },
+
+    watch: {
+        // You need to add this if the you have multiple wrap component(parent/child)
+        '$route': 'checkItem',
+
+        getCartItems() {
+            this.checkItem();
+        }
+    },
+
+    created() {
+        this.checkItem();
     },
 
     methods: {
         addToCart() {
+            const product = {
+                id: this.product.id,
+                name: this.product.name,
+                price: this.product.price,
+                productImage: this.product.productImage
+            }
+
+            this.$store.dispatch('cart/addCart', product);
             this.$store.dispatch('cart/setCartStatus', true);
-            this.$emit('addToCart');
-        }
+            console.log('added to cart ');
+        },
+
+        checkItem() {
+            const item = this.getCartItems.find(item => item.id === this.id);
+
+            if(item) {
+                this.isDisabled = true;
+            } else {
+                this.isDisabled = false;
+            }
+        },
     }
 }
 </script>

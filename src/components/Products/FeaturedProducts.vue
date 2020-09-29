@@ -15,10 +15,7 @@
                     <div class="column">
                         <app-add-to-cart
                             :id="product.id"
-                            :name="product.name"
-                            label="Add To Cart"
-                            @addToCart="addToCart"
-                            :isDisabled="isDisabled"
+                            :product="product"
                         ></app-add-to-cart>
                     </div>
                 </div>
@@ -31,9 +28,8 @@
                 <h2 class="subtitle">{{ productDesc }}</h2>
                 
                 <app-add-to-cart
-                    :id="productId"
-                    :name="productName"
-                    label="Add To Cart"
+                    :id="product.id"
+                    :product="product"
                 ></app-add-to-cart>
             </div>
             <div class="column is-6  has-text-centered">
@@ -45,7 +41,6 @@
 
 <script>
 import AddToCart from '@/components/Cart/AddToCart';
-import { mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -54,7 +49,7 @@ export default {
 
     props: {
         product: {
-            type: Array
+            type: Object
         },
 
         isLeft: {
@@ -65,41 +60,11 @@ export default {
 
     data() {
         return {
-            isDisabled: false,
         }
     },
 
-    computed: {
-        ...mapGetters('cart', ['getCartItems'])
-    },
-
-    mounted() {
-        this.checkItem();
-    },
 
     methods: {
-        addToCart() {
-            const product = {
-                id: this.product.id,
-                name: this.product.name,
-                price: this.product.price,
-                productImage: this.product.productImage
-            }
-
-            this.$store.dispatch('cart/addCart', product);
-            console.log('added to cart ');
-            this.checkItem();
-        },
-
-        checkItem() {
-            const item = this.getCartItems.find(item => item.id === this.product.id);
-
-            if(item) {
-                this.isDisabled = true;
-            } else {
-                this.isDisabled = false;
-            }
-        },
     }
 }
 </script>

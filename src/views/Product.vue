@@ -29,11 +29,8 @@
                         <p>{{ getProduct.desc }}</p>                    
                         <div class="buttons">
                             <app-add-to-cart
-                                :id="Number(getProduct.id)"
-                                :name="getProduct.name"
-                                :price="getProduct.price"  
-                                @addToCart="addToCart"    
-                                :isDisabled="isDisabled"                  
+                                :id="Number($route.params.id)"
+                                :product="getProduct"                 
                             >
                             </app-add-to-cart>
 
@@ -86,6 +83,7 @@ export default {
     data() {
         return {
             isDisabled: false,
+            id: Number(this.$route.params.id),
             tabs: {
                 link: 0,
                 content: 0,
@@ -119,9 +117,6 @@ export default {
         this.fetchData();
     },
 
-    mounted() {
-        this.checkItem();
-    },
 
     methods: {
         fetchData() {
@@ -133,29 +128,6 @@ export default {
             let image = this.$refs.bigImage.src = require(`@/assets/images/${img}`);
             return  image;
         },
-
-        addToCart() {
-            const product = {
-                id: this.getProduct.id,
-                name: this.getProduct.name,
-                price: this.getProduct.price,
-                productImage: this.getProduct.productImage
-            }
-
-            this.$store.dispatch('cart/addCart', product);
-            this.checkItem();
-        },
-
-        checkItem() {
-            const item = this.getCartItems.find(item => item.id === this.getProduct.id);
-
-            if(item) {
-                this.isDisabled = true;
-            } else {
-                this.isDisabled = false;
-            }
-        }
-
     }
 }
 </script>

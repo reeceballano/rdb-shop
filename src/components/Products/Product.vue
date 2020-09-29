@@ -24,10 +24,7 @@
 
                                 <app-add-to-cart
                                     :id="product.id"
-                                    label="Add To Cart"
-                                    :name="product.name"
-                                    @addToCart="addToCart"
-                                    :isDisabled="isDisabled"
+                                    :product="product"
                                 ></app-add-to-cart>
                             </p>
                         </div>
@@ -42,7 +39,6 @@
 <script>
 import AddToCart from '@/components/Cart/AddToCart';
 import AddToWishlist from '@/components/Wishlist/AddToWishlist';
-import { mapGetters } from 'vuex';
 
 export default {
     name: 'Product',
@@ -66,47 +62,9 @@ export default {
 
     data() {
         return {
-            isDisabled: false,
         }
     },
 
-    computed: {
-        ...mapGetters('cart', ['getCartItems']),
-    },
-
-    mounted() {
-        this.checkItem();
-    },
-
-    watch: {
-        getCartItems() {
-            this.checkItem();
-        }
-    },
-
-    methods: {
-        checkItem() {
-            const item = this.getCartItems.find(item => item.id === this.product.id);
-
-            if(item) {
-                this.isDisabled = true;
-            } else {
-                this.isDisabled = false;
-            }
-        },
-        
-        addToCart() {
-            const product = {
-                id: this.product.id,
-                name: this.product.name,
-                price: this.product.price,
-                productImage: this.product.productImage
-            }
-
-            this.$store.dispatch('cart/addCart', product);
-            console.log('added to cart ');
-        }
-    }
 }
 </script>
 
